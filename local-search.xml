@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>灵玉劫开发日记-Day1</title>
+    <link href="/2023/01/08/%E7%81%B5%E7%8E%89%E5%8A%AB%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0-Day1/"/>
+    <url>/2023/01/08/%E7%81%B5%E7%8E%89%E5%8A%AB%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0-Day1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="灵玉劫开发日记-Day1"><a href="#灵玉劫开发日记-Day1" class="headerlink" title="灵玉劫开发日记-Day1"></a>灵玉劫开发日记-Day1</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 - 前言"></a>0x00 - 前言</h2><p>从今天开始，我们将进行控制台小游戏“灵玉劫”的开发，这也是我第一季连载的博客和开发的程序。</p><p>相信在这次开发中，我们一定能收获不少。</p><p>跟着我，一起在开发的世界里尽情享受吧！</p><hr><h2 id="0x01-开发环境"><a href="#0x01-开发环境" class="headerlink" title="0x01 - 开发环境"></a>0x01 - 开发环境</h2><p>由于VisualStudio比较大，而Code中C++的配置不太容易(以后我会更一期Code的C++配置)，所以我们采用了Dev-C++。</p><p>先戳这个网址来下载安装包<a href="https://bloodshed-dev-c.en.softonic.com/">https://bloodshed-dev-c.en.softonic.com/</a></p><p><img src="https://i.328888.xyz/2023/01/08/kuVLv.png" alt="img1"></p><p><strong>注意！点完“Free Download”按钮，等它加载完，新的网页里往下划还有一个下载按钮，按了才能下载</strong></p><p>下载完成后运行你所下载的exe文件，可以自定义路径，其它的就一直按next（或者继续）就可以了。</p><h2 id="0x02-开始创作"><a href="#0x02-开始创作" class="headerlink" title="0x02 - 开始创作"></a>0x02 - 开始创作</h2><p>打开Dev-C++，你可以自定义你喜欢的界面，也可以直接按next（或者继续）跳过，因为这只是决定外观好不好看，对编写代码没有造成不便。</p><p>然后点击右上角的 文件 –&gt; 新建 –&gt; 项目，选择控制台应用（Console Applicntion），修改下面的名字为“灵玉劫”，然后新建一个文件夹“灵玉劫”，再在“灵玉劫”文件夹里新建一个“lib”文件夹，将“灵玉劫.dev”保存到这个lib文件夹里去。</p><p><strong>注意！语言一定要选C++项目，不要勾缺省语言！</strong></p><p><img src="https://i.328888.xyz/2023/01/08/kuixU.png" alt="img2"></p><hr><h2 id="0x03-小结"><a href="#0x03-小结" class="headerlink" title="0x03 - 小结"></a>0x03 - 小结</h2><p>今天，我们完成了项目“灵玉劫”的创建。收藏我的博客，下一期，我们将写出代码的框架。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>开发日记</tag>
+      
+      <tag>灵玉劫</tag>
+      
+      <tag>游戏</tag>
+      
+      <tag>C++</tag>
+      
+      <tag>系列</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Welcome my blog!</title>
     <link href="/2023/01/08/Welcome-my-blog/"/>
     <url>/2023/01/08/Welcome-my-blog/</url>
