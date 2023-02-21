@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>EasyButtonX开发全程实录</title>
+    <link href="/2023/02/21/EasyButtonX%E5%BC%80%E5%8F%91%E5%85%A8%E7%A8%8B%E5%AE%9E%E5%BD%95/"/>
+    <url>/2023/02/21/EasyButtonX%E5%BC%80%E5%8F%91%E5%85%A8%E7%A8%8B%E5%AE%9E%E5%BD%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="EasyButtonX开发全程实录"><a href="#EasyButtonX开发全程实录" class="headerlink" title="EasyButtonX开发全程实录"></a>EasyButtonX开发全程实录</h1><h2 id="0x00-简介"><a href="#0x00-简介" class="headerlink" title="0x00 简介"></a>0x00 简介</h2><p>在 C++ 的开发中，我们不时会需要一些按钮来帮助我们获取用户的一些特定输入，比如在提示框中，使用按钮可以让用户无需从键盘输入“确定”。为了使用按钮，一般开发会使用 WinApp 的开发。但是 WinApp 的开发极为繁琐，甚至什么也不干，只是启动程序就需要写近 80 行代码。所以我们将开发一个简易的按钮组件“EasyButtonX”。</p><p>为了使用图形界面，我们使用 EasyX 进行开发。<strong>注意！使用 EasyButtonX 之前也需要安装 EasyX！</strong></p><hr><h2 id="0x01-准备工作"><a href="#0x01-准备工作" class="headerlink" title="0x01 准备工作"></a>0x01 准备工作</h2><p>这里，我们需要两个软件：EasyX 和 VisualStudio (不是VScode)，此处说明一下，建议以后使用我们的 EasyButtonX 时也用 VisualStudio 作为 IDE。</p><hr><h3 id="0x01-1-安装-VisualStudio"><a href="#0x01-1-安装-VisualStudio" class="headerlink" title="0x01.1 安装 VisualStudio"></a>0x01.1 安装 VisualStudio</h3><p>首先打开这个网址 <a href="https://visualstudio.microsoft.com/">https://visualstudio.microsoft.com/</a> ，下载 VisualStudio ，请下载 Community 版本 (旁边有一个 VisualStudioCode，不是那个)。</p><p>然后运行刚才下载的 <code>VisualStudioSetup.exe</code> ，等待一系列的配置以后，就会出现一个 VisualStudioInstaller ，我们在“可用”一栏里找到 VisualStudio Community 2022 ，选择安装，并安装所有与 C++ 有关的插件，不过有些大，大约 20 多个 G 吧，可以安装在 D: 盘上，但是 C: 盘仍然需要一些缓存的空间，大约 2G 左右。然后再等一会就好了 (PS: 中国古代历法中，一会是 10800 年)。</p><p>然后，我们就可以通过 VisualStudioInstaller 启动VisualStudio了。</p><hr><h3 id="0x01-2-安装EasyX"><a href="#0x01-2-安装EasyX" class="headerlink" title="0x01.2 安装EasyX"></a>0x01.2 安装EasyX</h3><p>首先打开这个网址 <a href="https://easyx.cn/">https://easyx.cn/</a> ，下载EasyX安装包。</p><p>随后运行刚才下载的文件，点“下一步”，然后把所有可以安装的版本全部安装一遍 (反正也没多大，装了只有好处)。</p><hr><p>至此，准备工作完成。</p><hr><h2 id="0x02-生成项目"><a href="#0x02-生成项目" class="headerlink" title="0x02 生成项目"></a>0x02 生成项目</h2><p>首先，我们打开 VisualStudio (以下简称 VS)</p><p>点击“创建新项目”，选择“空项目”，然后项目名称填“EasyButtonX”，存储位置自定，并勾选“将解决方案和项目放在同一目录中”。</p><p>等待创建完成，我们依次点击 新建 -&gt; </p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>灵玉劫开发日记-Day2</title>
     <link href="/2023/01/15/%E7%81%B5%E7%8E%89%E5%8A%AB%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0-Day2/"/>
     <url>/2023/01/15/%E7%81%B5%E7%8E%89%E5%8A%AB%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0-Day2/</url>
