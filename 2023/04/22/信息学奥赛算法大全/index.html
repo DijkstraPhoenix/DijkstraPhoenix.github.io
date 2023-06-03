@@ -1,0 +1,833 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="DijkstraPhoenix">
+  <meta name="keywords" content="Blog">
+  
+    <meta name="description" content="信息学奥赛算法大全前言这是一篇博客，也可以说是一本书。这篇博客将带着读者们遨游 OI 的世界。在这里，你可以看到从基本的顺序结构到困难的 A* 算法。我们的学习过程中，需要使用到 Openjudge 和 洛谷 、 Acwing 几种 OJ，请各位读者提前注册好账号。通往 OI 的传送门现在开启！  ——DijkstraPhoenix，2023&#x2F;4&#x2F;27  一、语法初期学信奥是必须要学会语法的，语法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息学奥赛算法大全">
+<meta property="og:url" content="http://example.com/2023/04/22/%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%A5%A5%E8%B5%9B%E7%AE%97%E6%B3%95%E5%A4%A7%E5%85%A8/index.html">
+<meta property="og:site_name" content="DijkstraPhoenix &#39;s blog">
+<meta property="og:description" content="信息学奥赛算法大全前言这是一篇博客，也可以说是一本书。这篇博客将带着读者们遨游 OI 的世界。在这里，你可以看到从基本的顺序结构到困难的 A* 算法。我们的学习过程中，需要使用到 Openjudge 和 洛谷 、 Acwing 几种 OJ，请各位读者提前注册好账号。通往 OI 的传送门现在开启！  ——DijkstraPhoenix，2023&#x2F;4&#x2F;27  一、语法初期学信奥是必须要学会语法的，语法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.328888.xyz/2023/04/27/i9eKF5.png">
+<meta property="og:image" content="https://i.328888.xyz/2023/04/27/i9z4wc.png">
+<meta property="og:image" content="https://i.imgloc.com/2023/05/23/VAFTc5.png">
+<meta property="article:published_time" content="2023-04-22T02:33:06.000Z">
+<meta property="article:modified_time" content="2023-05-23T11:50:42.622Z">
+<meta property="article:author" content="DijkstraPhoenix">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="信息学">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.328888.xyz/2023/04/27/i9eKF5.png">
+  
+  
+  
+  <title>信息学奥赛算法大全 - DijkstraPhoenix &#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="信息学奥赛算法大全"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-22 10:33" pubdate>
+          2023年4月22日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          61 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">信息学奥赛算法大全</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="信息学奥赛算法大全"><a href="#信息学奥赛算法大全" class="headerlink" title="信息学奥赛算法大全"></a>信息学奥赛算法大全</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p style="text-indent:2em">这是一篇博客，也可以说是一本书。这篇博客将带着读者们遨游 OI 的世界。在这里，你可以看到从基本的顺序结构到困难的 A* 算法。我们的学习过程中，需要使用到 <a target="_blank" rel="noopener" href="https://noi.openjudge.cn">Openjudge</a> 和 <a target="_blank" rel="noopener" href="https://luogu.com.cn">洛谷</a> 、 <a target="_blank" rel="noopener" href="https://acwing.com">Acwing</a> 几种 OJ，请各位读者提前注册好账号。通往 OI 的传送门现在开启！</p>
+
+<p style="text-indent:19em">——DijkstraPhoenix，2023/4/27</p>
+
+<h2 id="一、语法初期"><a href="#一、语法初期" class="headerlink" title="一、语法初期"></a>一、语法初期</h2><p style="text-indent:2em">学信奥是必须要学会语法的，语法是将思维变成实现的一种介质，没有语法，任何思维都无法变为现实。</p>
+
+<h3 id="1-1-环境搭建"><a href="#1-1-环境搭建" class="headerlink" title="1.1 环境搭建"></a>1.1 环境搭建</h3><h4 id="Windows-环境"><a href="#Windows-环境" class="headerlink" title="Windows 环境"></a>Windows 环境</h4><p>在 Windows 环境下，我们使用 Dev-C++ 作为编译器(也就是 IDE)，安装方式如下：</p>
+<p>打开这个网址，下载安装包: <a target="_blank" rel="noopener" href="https://sourceforge.net/projects/orwelldevcpp/">https://sourceforge.net/projects/orwelldevcpp/</a></p>
+<p><img src="https://i.328888.xyz/2023/04/27/i9eKF5.png" srcset="/img/loading.gif" lazyload alt="下载页面"></p>
+<p>运行刚刚下载的安装包，进行下载（一开始的语言选择就选 English 就行了）。安装完后启动 Dev-C++，这里再选择语言为简体中文。字体、颜色、图标自己选，尽量选可以看得清的。</p>
+<p>然后就是这个样子：</p>
+<p><img src="https://i.328888.xyz/2023/04/27/i9z4wc.png" srcset="/img/loading.gif" lazyload alt="Dev-C++"></p>
+<h4 id="Linux-环境"><a href="#Linux-环境" class="headerlink" title="Linux 环境"></a>Linux 环境</h4><p>我们在 Linux 环境下，没有 Dev-C++，所以，我们选择另一种不错的 IDE —— Code::Blocks。</p>
+<p>如果不习惯 Code::Blocks 的话，可以使用 Geany （自行安装）。</p>
+<p>在这里，我们仅展示 Debian 内核的 Linux 安装 Code::Blocks 的步骤，其它 Linux 版本请自行查询安装教程。</p>
+<blockquote>
+<p>Tips: Debian 内核的 Linux 有 Kali、Ubuntu、Deepin、Noi linux 等。</p>
+</blockquote>
+<p>我们打开终端，输入以下命令：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install codeblocks <br></code></pre></td></tr></table></figure>
+
+<p>此时，我们需要输入当前用户的密码，才能进行安装（如果用的是超级用户的终端，可以不输入 <code>sudo</code>）。</p>
+<p>等待安装完成，我们就可以通过菜单或者在终端里输入 <code>codeblocks</code> 就能启动了。如果无法启动，则可以在终端里输入 <code>sudo codeblocks</code> 或者重装该软件。</p>
+<h3 id="1-2-Hello-World！"><a href="#1-2-Hello-World！" class="headerlink" title="1.2 Hello, World！"></a>1.2 Hello, World！</h3><p><strong>注：以后我们的代码里会有很多注释，程序不会执行它,如：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">//这是一行注释，它不会被执行</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">这是一个多行注释，不会被执行</span><br><span class="hljs-comment">这一行也不会被执行</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+
+<p>任何一本学习编程的书，基本上第一课就是输出 <code>Hello, World!</code>。</p>
+<p>本题请见 <a target="_blank" rel="noopener" href="http://noi.openjudge.cn/ch0101/01/">Openjudge 1.1.01 - Hello, World!</a></p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>输出一行字符串 “Hello, World!”</p>
+<h4 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">无<br></code></pre></td></tr></table></figure>
+
+<h4 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><span class="hljs-built_in">Hello,</span> World!<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>这道题我们可以画一个简单的流程图：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clean">程序开始 -&gt; 输出 <span class="hljs-string">&quot;Hello, World!&quot;</span> -&gt; 结束程序<br></code></pre></td></tr></table></figure>
+
+<p>在 C++ 中，任何一个程序都是从主函数执行的，我们只需要将代码写在主函数里就行了。</p>
+<p>主函数的定义：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> <span class="hljs-comment">//int 表示主函数的返回值是 int(整数) 类型的（必须是 int），main 是主函数的名称（也必须是 main），void 表示它不传任何参数，可以省略</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//要执行的代码</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当然，主函数还有其它的定义方式，比如以下几种(此处没有列举完)：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc)</span></span>&#123;&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc,<span class="hljs-type">char</span> *argv[])</span></span>&#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>不过我们学习信奥不需要这些参数，有兴趣的读者可以自行查阅资料。</p>
+<p>因为我们需要输出一些东西，而流输出函数 <code>cout</code> 定义在 <code>iostream</code> 头文件里，所以我们需要导入它。</p>
+<p>cout 是流输出函数，它不需要加括号，只需要加上流输出符号，如:<br><code>cout&lt;&lt;1&lt;&lt;2;</code></p>
+<p>完整代码（注释打不打也没有关系，这里做详细的讲解）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-comment">//导入流输入输出所在的头文件</span><br><span class="hljs-comment">//我们还可以使用万能头（并不是万能的），定义如下：</span><br><span class="hljs-comment">//#include&lt;bits/stdc+++.h&gt;</span><br><span class="hljs-comment">//在一些编译器中，并不支持万能头（只是少数）</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<span class="hljs-comment">//为防止程序员定义和 iostream 里重名的函数，所以声明了一个 std 命名空间</span><br><span class="hljs-comment">//using 表示使用，namespace 表示命名空间，std 是命名空间的名称</span><br><span class="hljs-comment">//这个语句表示使用 std 命名空间。如果不加上这一句，那么用 std 里的东西就需要有单独的声明：比如用 cout 需要写成 std::cout</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><span class="hljs-comment">//主函数</span></span><br><span class="hljs-function"></span>&#123;<br>    cout&lt;&lt;<span class="hljs-string">&quot;Hello, World!&quot;</span>&lt;&lt;endl;<span class="hljs-comment">//C++ 里的语句需要加上分号（英文半角的）</span><br>    <span class="hljs-comment">//字符串需要打上双引号，endl 表示换行</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-comment">//程序结束了，返回0</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们在 C++ 中，基本上是兼容 C 语言的代码的，所以，这个代码还可以这么写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stdio.h&quot;</span> </span><br><span class="hljs-comment">//C语言的输出函数定义在 stdio.h 里</span><br><span class="hljs-comment">//C语言没有 std 命名空间，不需要声明</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello, World!\n&quot;</span>);<span class="hljs-comment">//printf 是格式化输出函数，要加括号</span><br>    <span class="hljs-comment">// \n 是换行符，相当于 C++ 里的 endl</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们把这个程序保存为 <code>Helloworld.cpp</code>（名字可以自己改，后缀名不要改），运行一下就成功啦！</p>
+<p>如果我们用 C语言 写的话，还可以把后缀名改为 <code>.c</code>。</p>
+<h3 id="1-3-变量"><a href="#1-3-变量" class="headerlink" title="1.3 变量"></a>1.3 变量</h3><p>我们在编程中，不可避免的需要大量变量，本章我们来讲讲变量。</p>
+<p>变量是一种可以储存值的容器，可取值也可写入。</p>
+<p>常见的变量有以下几种：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-type">short</span> a;<span class="hljs-comment">//短整型变量</span><br><span class="hljs-type">int</span> b;<span class="hljs-comment">//整型变量</span><br><span class="hljs-type">long</span> c;<span class="hljs-comment">//长整型变量（ps：在几乎所有的电脑上，它和int没有区别）</span><br><span class="hljs-type">long</span> <span class="hljs-type">long</span> d;<span class="hljs-comment">//超长整型变量</span><br><span class="hljs-type">float</span> e;<span class="hljs-comment">//单精度浮点型变量（就是小数）</span><br><span class="hljs-type">double</span> f;<span class="hljs-comment">//双精度浮点型变量</span><br><span class="hljs-type">long</span> <span class="hljs-type">double</span> g;<span class="hljs-comment">//超长浮点型变量</span><br><span class="hljs-type">char</span> h;<span class="hljs-comment">//字符变量（只能存一个字符）</span><br>string i;<span class="hljs-comment">//字符串</span><br><span class="hljs-type">bool</span> j;<span class="hljs-comment">//布尔类型变量（取值只有“真”和“假”）</span><br>......<br></code></pre></td></tr></table></figure>
+
+<p>而一些变量名称前面还可以加上修饰符：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> ca=<span class="hljs-number">10000</span>;<span class="hljs-comment">//整型常量（不能修改值，必须在定义是赋值）</span><br><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> ui;<span class="hljs-comment">//无符号整型（只能是正数）</span><br><span class="hljs-type">signed</span> <span class="hljs-type">int</span> si;<span class="hljs-comment">//带符号整型（可以是正数或负数）</span><br>......<br></code></pre></td></tr></table></figure>
+
+<p>不过变量也有取值范围，这里写出几种：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-type">int</span>: (<span class="hljs-number">-2</span>^<span class="hljs-number">31</span><span class="hljs-number">-1</span>)~(<span class="hljs-number">2</span>^<span class="hljs-number">31</span><span class="hljs-number">-1</span>)<br><span class="hljs-type">long</span> <span class="hljs-type">long</span>:(<span class="hljs-number">-2</span>^<span class="hljs-number">63</span><span class="hljs-number">-1</span>)~(<span class="hljs-number">2</span>^<span class="hljs-number">63</span><span class="hljs-number">-1</span>)<br><span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span>: (<span class="hljs-number">0</span>)~(<span class="hljs-number">2</span>^<span class="hljs-number">64</span><span class="hljs-number">-1</span>)<br><span class="hljs-type">bool</span>: <span class="hljs-literal">true</span>或<span class="hljs-literal">false</span><br>......<br></code></pre></td></tr></table></figure>
+
+<p>超过变量的取值范围，变量将会顶破符号位（在位运算中会详细讲解），变成一个极大的负数。</p>
+<p>在我们编程中，要选择合适的变量类型和名称，否则会造成不必要的错误。</p>
+<p>变量的命名规则有以下几点：1.只能由大小写英文字母、数字和下划线组成（可以使用下划线或者大小写来表示空格）。2.不能以数字开头。3.要避免已经定义过的变量，不管是什么类型的，而且不能定义 C++ 自带的标识符（例如 cin、cout、printf 等）。</p>
+<p>变量也可以互相运算，在 C++ 里，运算符分别是这样的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C++">a+b<span class="hljs-comment">//加法</span><br>a-b<span class="hljs-comment">//减法</span><br>a*b<span class="hljs-comment">//乘法</span><br>a/b<span class="hljs-comment">//除法</span><br>a%b<span class="hljs-comment">//取余运算（模运算）</span><br>a==b<span class="hljs-comment">//注意：C++表示两个两相等使用两个等号</span><br>a!=b<span class="hljs-comment">//a不等于b</span><br>a&lt;b<span class="hljs-comment">//a小于b</span><br>a&gt;b<span class="hljs-comment">//a大于b</span><br>a&lt;=b<span class="hljs-comment">//a小于等于b</span><br>a&gt;=b<span class="hljs-comment">//a大于等于b</span><br></code></pre></td></tr></table></figure>
+
+<p>而变量的变化方式也有几种：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C++">a=b<span class="hljs-comment">//直接把b的值赋给a</span><br>a+=b<span class="hljs-comment">//把a的值加上b</span><br>a-=b<span class="hljs-comment">//把a的值减少b</span><br>a*=b<span class="hljs-comment">//把a的值乘上b</span><br>a/=b<span class="hljs-comment">//把a的值除以b</span><br>a++<span class="hljs-comment">//相当于a=a+1;</span><br>a--<span class="hljs-comment">//相当于a=a-1;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-4-顺序结构"><a href="#1-4-顺序结构" class="headerlink" title="1.4 顺序结构"></a>1.4 顺序结构</h3><h4 id="A-B-Problem"><a href="#A-B-Problem" class="headerlink" title="A+B Problem"></a>A+B Problem</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1001">洛谷 P1001 A+B Problem</a></p>
+<h5 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h5><p>输入两个整数 a,b ，输出它们的和 ( |a|,|b| &lt;&#x3D; 1e9 )。</p>
+<h5 id="输入样例-1"><a href="#输入样例-1" class="headerlink" title="输入样例"></a>输入样例</h5><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">20 </span><span class="hljs-number">30</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="输出样例-1"><a href="#输出样例-1" class="headerlink" title="输出样例"></a>输出样例</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">50<br></code></pre></td></tr></table></figure>
+
+<p>对于这道题，我们需要定义两个变量，来保存 a 和 b 的值，输入这两个变量，在输出它们的和就行了。</p>
+<p>所以，我们可以写出这样的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a,b;<span class="hljs-comment">//定义两个变量a、b</span><br>    cin&gt;&gt;a&gt;&gt;b;<span class="hljs-comment">//输入a和b(此处使用了流输出，和cout一样，也在iostream头文件和std命名空间里，不过要区分流输入符号和流输出符号)</span><br>    cout&lt;&lt;a+b;<span class="hljs-comment">//输出和</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="输出第2个整数"><a href="#输出第2个整数" class="headerlink" title="输出第2个整数"></a>输出第2个整数</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B2003">洛谷 B2003</a></p>
+<h5 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h5><p>输入三个整数，整数之间由一个空格分隔。把第二个输入的整数输出。</p>
+<h5 id="输入样例-2"><a href="#输入样例-2" class="headerlink" title="输入样例"></a>输入样例</h5><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">123 </span><span class="hljs-number">456</span> <span class="hljs-number">789</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="输出样例-2"><a href="#输出样例-2" class="headerlink" title="输出样例"></a>输出样例</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">456<br></code></pre></td></tr></table></figure>
+
+<p>本题我们需要定义三个变量，分别输入后再输出第二个变量的值，代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a,b,c;<br>    cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;<br>    cout&lt;&lt;b;<span class="hljs-comment">//第二个变量</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="课后习题"><a href="#课后习题" class="headerlink" title="课后习题"></a>课后习题</h4><p>1.<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B2008">计算 (a+b)×c 的值 (洛谷B2008)</a></p>
+<p>2.<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B2021">输出保留 3 位小数的浮点数(洛谷B2021)</a></p>
+<p>提示：保留3位小数可以用 <code>printf(&quot;%.3f&quot;,float类型变量);</code>，double类型需要是 <code>%.3lf</code></p>
+<p>3.<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B2010">带余除法 (洛谷B2010)</a></p>
+<hr>
+<h3 id="1-5-分支结构"><a href="#1-5-分支结构" class="headerlink" title="1.5 分支结构"></a>1.5 分支结构</h3><h4 id="奇偶数判断"><a href="#奇偶数判断" class="headerlink" title="奇偶数判断"></a>奇偶数判断</h4><p><a target="_blank" rel="noopener" href="http://noi.openjudge.cn/ch0104/03/">openjudge 1.4-3</a></p>
+<h5 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h5><p>给定一个整数 n，判断该数是奇数还是偶数。如果 n 是奇数，输出 <code>odd</code>；如果 n 是偶数，输出 <code>even</code>。</p>
+<h5 id="输入样例-3"><a href="#输入样例-3" class="headerlink" title="输入样例"></a>输入样例</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">5<br></code></pre></td></tr></table></figure>
+
+<h5 id="输出样例-3"><a href="#输出样例-3" class="headerlink" title="输出样例"></a>输出样例</h5><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">odd</span><br></code></pre></td></tr></table></figure>
+
+<p>这道题我们需要进行一个判断：如果(n是奇数) 输出”odd”；否则 输出”even”。</p>
+<p>而 C++ 里的判断语句，我们可以使用 “if……else if……else” 语句，if 后面的括号里是填判断的依据。</p>
+<p>所以，代码可以这么写：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> n;<br>    cin&gt;&gt;n;<br>    <span class="hljs-keyword">if</span>(n%<span class="hljs-number">2</span>==<span class="hljs-number">1</span>)<span class="hljs-comment">//除2的余数是1</span><br>    &#123;<br>        <span class="hljs-comment">//奇数</span><br>        cout&lt;&lt;<span class="hljs-string">&quot;odd&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-comment">//否则是偶数</span><br>    &#123;<br>        cout&lt;&lt;<span class="hljs-string">&quot;even&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="输出绝对值"><a href="#输出绝对值" class="headerlink" title="输出绝对值"></a>输出绝对值</h4><p><a target="_blank" rel="noopener" href="http://noi.openjudge.cn/ch0104/02/">openjudge 1.4-2</a></p>
+<h5 id="题目描述-4"><a href="#题目描述-4" class="headerlink" title="题目描述"></a>题目描述</h5><p>输入一个浮点数，输出这个浮点数的绝对值。</p>
+<h5 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h5><p>输入一个浮点数，其绝对值不超过10000。</p>
+<h5 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h5><p>输出这个浮点数的绝对值，保留到小数点后两位。</p>
+<h5 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h5><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-3.14</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h5><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">3</span>.<span class="hljs-number">14</span><br></code></pre></td></tr></table></figure>
+
+<p>这道题存在一个使用库函数 <code>fabs()</code> 的做法，在这里不做讲解，有兴趣的读者自行查阅。</p>
+<p>绝对值是指一个数到 0 的距离，例如 | 123 | &#x3D; 123, | -456 | &#x3D; 456。</p>
+<p>不难看出，正数和 0 的绝对值就是它本身，而负数的绝对值就是对它取反。</p>
+<p>所以，本题可以分类列举大于等于 0 和小于 0 两种情况。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">float</span> x;<span class="hljs-comment">//浮点数，需要 float 类型</span><br>    cin&gt;&gt;x;<br>    <span class="hljs-comment">//对于这种问题，我们可以使用三目运算符，相当于一个微型的if-else语句</span><br>    cout&lt;&lt;(x&gt;=<span class="hljs-number">0</span>?<span class="hljs-comment">/*正数*/</span>x<span class="hljs-comment">/*否则*/</span>:<span class="hljs-comment">/*负数*/</span>-x);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其中的三目运算符 <code>cout&lt;&lt;(x&gt;=0?x:-x);</code> 和这段代码等同：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">if</span>(x&gt;=<span class="hljs-number">0</span>)<br>&#123;<br>    cout&lt;&lt;x;<br>&#125;<br><span class="hljs-keyword">else</span> <br>&#123;<br>    cout&lt;&lt;-x;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h4><p>常见的逻辑运算有与、或、非三种。</p>
+<p>与的两边同时成立，则表达式成立；或的两边只要有一个是成立的，则表达式成立；非的后面是成立的，则表达式不成立，否则成立。</p>
+<p>它们分别写作 <code>&amp;&amp;</code> 、 <code>||</code> 、 <code>!</code>，写在 if 语句里就会变成这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">if</span>(<span class="hljs-number">1</span>+<span class="hljs-number">1</span>==<span class="hljs-number">2</span> &amp;&amp; <span class="hljs-number">3</span>*<span class="hljs-number">3</span>==<span class="hljs-number">9</span>)<br><span class="hljs-keyword">if</span>(<span class="hljs-number">1</span>+<span class="hljs-number">1</span>==<span class="hljs-number">2</span> || <span class="hljs-number">3</span>*<span class="hljs-number">3</span>==<span class="hljs-number">10</span>)<br><span class="hljs-keyword">if</span>(!(<span class="hljs-number">1</span>+<span class="hljs-number">1</span>==<span class="hljs-number">3</span>))<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="课后习题-1"><a href="#课后习题-1" class="headerlink" title="课后习题"></a>课后习题</h4><p>1.<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B2035">判断正负 (洛谷 B2035)</a></p>
+<p>2.<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B2040">判断是否为两位数 (洛谷 B2040)</a></p>
+<p>3.<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B2043">判断能否被 3，5，7 整除 (洛谷 B2043)</a></p>
+<p>Tips：此题需要使用到逻辑运算。</p>
+<hr>
+<h3 id="1-6-循环结构"><a href="#1-6-循环结构" class="headerlink" title="1.6 循环结构"></a>1.6 循环结构</h3><p>我们在编程中，总会需要循环，虽然一些可以不停地写同一行代码，但遇到无限循环或者不定次数循环就无能为力了。</p>
+<p>常见的循环有三种：<code>while</code> 循环、<code>do···while</code> 循环和 <code>for</code> 循环。</p>
+<p>首先说说 while 循环。</p>
+<p>while 循环是一种条件循环，每次循环检测一次循环条件，成立的话就循环一次，然后再检查。</p>
+<p>例如这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span>(i&lt;=<span class="hljs-number">10</span>)<br>&#123;<br>    cout&lt;&lt;<span class="hljs-string">&quot;Hello&quot;</span>&lt;&lt;endl;<br>    i++;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>而 do…while 循环则是先循环一次，再判断条件是否成立。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;<br><span class="hljs-keyword">do</span><br>&#123;<br>    cout&lt;&lt;<span class="hljs-string">&quot;Hello&quot;</span>&lt;&lt;endl;<br>    i++;<br>&#125;<span class="hljs-keyword">while</span>(i&lt;=<span class="hljs-number">10</span>);<span class="hljs-comment">//别忘了加分号</span><br></code></pre></td></tr></table></figure>
+
+<p>for 循环是一种很常用的循环，它的功能很多，甚至在 C++14 及以后的版本里可以直接遍历一个不定量数组。</p>
+<p>它的模板是 <code>for(定义（也可以直接使用已定义的）循环变量=初始值;循环条件;变化规则)</code>，当然三个语句不一定都要写，但是分号不能省。如前两个样例也可以写成这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">10</span>;i++)<br>&#123;<br>    cout&lt;&lt;<span class="hljs-string">&quot;Hello&quot;</span>&lt;&lt;endl;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="输出-n-次-“Hello-World-”"><a href="#输出-n-次-“Hello-World-”" class="headerlink" title="输出 n 次 “Hello, World!”"></a>输出 n 次 “Hello, World!”</h4><p>本题是自编题。</p>
+<h5 id="题目描述-5"><a href="#题目描述-5" class="headerlink" title="题目描述"></a>题目描述</h5><p>给定一个 n ，输出 n 行 <code>Hello, World!</code>。</p>
+<h5 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入"></a>样例输入</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">5<br></code></pre></td></tr></table></figure>
+
+<h5 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出"></a>样例输出</h5><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><span class="hljs-built_in">Hello,</span> World!<br><span class="hljs-built_in">Hello,</span> World!<br><span class="hljs-built_in">Hello,</span> World!<br><span class="hljs-built_in">Hello,</span> World!<br><span class="hljs-built_in">Hello,</span> World!<br></code></pre></td></tr></table></figure>
+
+<p>这道题是在 Hello, World! 的基础上加上了循环。根据它需要循环 n 次，不难想出这道题需要使用 for 循环。</p>
+<p>所以代码可以这么写：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> n;<br>    cin&gt;&gt;n;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)<br>        cout&lt;&lt;<span class="hljs-string">&quot;Hello, World!&quot;</span>&lt;&lt;endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="课后习题-2"><a href="#课后习题-2" class="headerlink" title="课后习题"></a>课后习题</h4><h5 id="N-个-A-B"><a href="#N-个-A-B" class="headerlink" title="N 个 A+B"></a>N 个 A+B</h5><p>本题是自编题。</p>
+<h5 id="题目描述-6"><a href="#题目描述-6" class="headerlink" title="题目描述"></a>题目描述</h5><p>给定 N，接下来的 N 行每行两个整数 A、B，求 A+B，输出共 N 行。</p>
+<h5 id="输入样例-4"><a href="#输入样例-4" class="headerlink" title="输入样例"></a>输入样例</h5><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-number">5</span><br><span class="hljs-symbol">1 </span><span class="hljs-number">2</span><br><span class="hljs-symbol">6 </span><span class="hljs-number">6</span><br><span class="hljs-symbol">23 </span><span class="hljs-number">54</span><br><span class="hljs-symbol">123 </span><span class="hljs-number">97</span><br><span class="hljs-symbol">56 </span><span class="hljs-number">12</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="输出样例-4"><a href="#输出样例-4" class="headerlink" title="输出样例"></a>输出样例</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs">3<br>12<br>77<br>220<br>68<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-7-一维数组"><a href="#1-7-一维数组" class="headerlink" title="1.7 一维数组"></a>1.7 一维数组</h3><p>如果我们需要输入 10 个整数，并且输出它们的和，只用变量的话，我们就需要像 <code>int a,b,c,d,e,f,g,h,i,j;</code> 这样定义 10 个变量，非常麻烦。那么，如果可以把它们合并成一个长条，就方便多了。于是，C++ 里引进了数组的思想。</p>
+<p>我们可以把数组看成这样的一个长条：</p>
+<p><img src="https://i.imgloc.com/2023/05/23/VAFTc5.png" srcset="/img/loading.gif" lazyload alt="数组.png"></p>
+<p>我们在定义数组时，只需要在变量的基础上，在后面加速中括号并填上数组大小即可。如：定义一个长度为 10 的整型数组 A，就可以写作 <code>int A[10];</code> ，如需访问一个值，就在中括号里写上下标位置即可。如输出 A 的第 6 个值，可以写作 <code>cout&lt;&lt;A[6]</code>。</p>
+<h4 id="查找特定的值"><a href="#查找特定的值" class="headerlink" title="查找特定的值"></a>查找特定的值</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B2093">洛谷 B2093</a></p>
+<h2 id="二、基础算法"><a href="#二、基础算法" class="headerlink" title="二、基础算法"></a>二、基础算法</h2><h3 id="1-1-模拟算法"><a href="#1-1-模拟算法" class="headerlink" title="1.1 模拟算法"></a>1.1 模拟算法</h3><p>模拟是一种最基础的算法，它的策略是按照题目的要求，一步一步的进行模拟各个值的变化，从而获取答案。</p>
+<h4 id="Peter-的烟"><a href="#Peter-的烟" class="headerlink" title="Peter 的烟"></a>Peter 的烟</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1150">洛谷 P1150</a></p>
+<h5 id="题目描述-7"><a href="#题目描述-7" class="headerlink" title="题目描述"></a>题目描述</h5><p>Peter 有 n 根烟，他每吸完一根烟就把烟蒂保存起来，k(k &gt; 1)个烟蒂可以换一个新的烟，那么 Peter 最终能吸到多少根烟呢？</p>
+<p>与某些脑筋急转弯不同的是，Peter 并不能从异次元借到烟蒂，抽完后再还回去。</p>
+<h5 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h5><p>每组测试数据一行包括两个整数 n,k (1 &lt; n,k &lt;&#x3D; 1e8)。</p>
+<h5 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h5><p>对于每组测试数据，输出一行包括一个整数表示最终烟的根数。</p>
+<h5 id="输入样例-5"><a href="#输入样例-5" class="headerlink" title="输入样例"></a>输入样例</h5><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">4 </span><span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="输出样例-5"><a href="#输出样例-5" class="headerlink" title="输出样例"></a>输出样例</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">5<br></code></pre></td></tr></table></figure>
+
+<p>本题我们可以先吸一根烟，随后再检查一下能不能用烟蒂换一些烟，如果可以，就把烟蒂数清零，并且把烟的数量加 1，然后再抽一根烟……以此类推。</p>
+<p>此处我们就需要刚才讲的循环了。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> n,k;<br>    cin&gt;&gt;n&gt;&gt;k;<br>    <span class="hljs-type">int</span> num=<span class="hljs-number">0</span>;<span class="hljs-comment">//抽了的数量</span><br>    <span class="hljs-type">int</span> m=<span class="hljs-number">0</span>;<span class="hljs-comment">//当前烟蒂数</span><br>    <span class="hljs-keyword">while</span>(n&gt;<span class="hljs-number">0</span>)<br>    &#123;<br>        <span class="hljs-comment">//抽烟</span><br>        n--;<br>        num++;<br>        m++;<br>        <span class="hljs-comment">//判断是否能换</span><br>        <span class="hljs-keyword">if</span>(m==k)<br>        &#123;<br>            n++;<br>            m=<span class="hljs-number">0</span>;<br>        &#125;<br>    &#125;<br>    cout&lt;&lt;num;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/C/">#C++</a>
+      
+        <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AD%A6/">#信息学</a>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>信息学奥赛算法大全</div>
+      <div>http://example.com/2023/04/22/信息学奥赛算法大全/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>DijkstraPhoenix</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/31/%E6%B4%9B%E8%B0%B7-AT-agc006-f-Blackout%E9%A2%98%E8%A7%A3/" title="洛谷[AT_agc006_f]Blackout题解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">洛谷[AT_agc006_f]Blackout题解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/18/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%88%B6%E4%BD%9CMinecraft%E6%A8%A1%E7%BB%84/" title="从0开始制作Minecraft模组">
+                        <span class="hidden-mobile">从0开始制作Minecraft模组</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

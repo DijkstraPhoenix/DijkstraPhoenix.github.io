@@ -1,0 +1,681 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="DijkstraPhoenix">
+  <meta name="keywords" content="Blog">
+  
+    <meta name="description" content="EasyButtonX开发全程实录0x00 简介在 C++ 的开发中，我们不时会需要一些按钮来帮助我们获取用户的一些特定输入，比如在提示框中，使用按钮可以让用户无需从键盘输入“确定”。为了使用按钮，一般开发会使用 WinApp 的开发。但是 WinApp 的开发极为繁琐，甚至什么也不干，只是启动程序就需要写近 80 行代码。所以我们将开发一个简易的按钮组件“EasyButtonX”。 为了使用图形">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EasyButtonX开发全程实录">
+<meta property="og:url" content="http://example.com/2023/02/21/EasyButtonX%E5%BC%80%E5%8F%91%E5%85%A8%E7%A8%8B%E5%AE%9E%E5%BD%95/index.html">
+<meta property="og:site_name" content="DijkstraPhoenix &#39;s blog">
+<meta property="og:description" content="EasyButtonX开发全程实录0x00 简介在 C++ 的开发中，我们不时会需要一些按钮来帮助我们获取用户的一些特定输入，比如在提示框中，使用按钮可以让用户无需从键盘输入“确定”。为了使用按钮，一般开发会使用 WinApp 的开发。但是 WinApp 的开发极为繁琐，甚至什么也不干，只是启动程序就需要写近 80 行代码。所以我们将开发一个简易的按钮组件“EasyButtonX”。 为了使用图形">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-21T11:08:31.000Z">
+<meta property="article:modified_time" content="2023-05-09T13:08:15.883Z">
+<meta property="article:author" content="DijkstraPhoenix">
+<meta property="article:tag" content="开发">
+<meta property="article:tag" content="组件">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>EasyButtonX开发全程实录 - DijkstraPhoenix &#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="EasyButtonX开发全程实录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-21 19:08" pubdate>
+          2023年2月21日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">EasyButtonX开发全程实录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="EasyButtonX开发全程实录"><a href="#EasyButtonX开发全程实录" class="headerlink" title="EasyButtonX开发全程实录"></a>EasyButtonX开发全程实录</h1><h2 id="0x00-简介"><a href="#0x00-简介" class="headerlink" title="0x00 简介"></a>0x00 简介</h2><p>在 C++ 的开发中，我们不时会需要一些按钮来帮助我们获取用户的一些特定输入，比如在提示框中，使用按钮可以让用户无需从键盘输入“确定”。为了使用按钮，一般开发会使用 WinApp 的开发。但是 WinApp 的开发极为繁琐，甚至什么也不干，只是启动程序就需要写近 80 行代码。所以我们将开发一个简易的按钮组件“EasyButtonX”。</p>
+<p>为了使用图形界面，我们使用 EasyX 进行开发。<strong>注意！使用 EasyButtonX 之前也需要安装 EasyX！</strong></p>
+<hr>
+<h2 id="0x01-准备工作"><a href="#0x01-准备工作" class="headerlink" title="0x01 准备工作"></a>0x01 准备工作</h2><p>这里，我们需要两个软件：EasyX 和 VisualStudio (不是VScode)，此处说明一下，建议以后使用我们的 EasyButtonX 时也用 VisualStudio 作为 IDE。</p>
+<hr>
+<h3 id="0x01-1-安装-VisualStudio"><a href="#0x01-1-安装-VisualStudio" class="headerlink" title="0x01.1 安装 VisualStudio"></a>0x01.1 安装 VisualStudio</h3><p>首先打开这个网址 <a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/">https://visualstudio.microsoft.com/</a> ，下载 VisualStudio ，请下载 Community 版本 (旁边有一个 VisualStudioCode，不是那个)。</p>
+<p>然后运行刚才下载的 <code>VisualStudioSetup.exe</code> ，等待一系列的配置以后，就会出现一个 VisualStudioInstaller ，我们在“可用”一栏里找到 VisualStudio Community 2022 ，选择安装，并安装所有与 C++ 有关的插件，不过有些大，大约 20 多个 G 吧，可以安装在 D: 盘上，但是 C: 盘仍然需要一些缓存的空间，大约 2G 左右。然后再等一会就好了 (PS: 中国古代历法中，一会是 10800 年)。</p>
+<p>然后，我们就可以通过 VisualStudioInstaller 启动VisualStudio了。</p>
+<hr>
+<h3 id="0x01-2-安装EasyX"><a href="#0x01-2-安装EasyX" class="headerlink" title="0x01.2 安装EasyX"></a>0x01.2 安装EasyX</h3><p>首先打开这个网址 <a target="_blank" rel="noopener" href="https://easyx.cn/">https://easyx.cn/</a> ，下载EasyX安装包。</p>
+<p>随后运行刚才下载的文件，点“下一步”，然后把所有可以安装的版本全部安装一遍 (反正也没多大，装了只有好处)。</p>
+<hr>
+<p>至此，准备工作完成。</p>
+<hr>
+<h2 id="0x02-生成项目"><a href="#0x02-生成项目" class="headerlink" title="0x02 生成项目"></a>0x02 生成项目</h2><p>首先，我们打开 VisualStudio (以下简称 VS)</p>
+<p>点击“创建新项目”，选择“空项目”，然后项目名称填“EasyButtonX”，存储位置自定，并勾选“将解决方案和项目放在同一目录中”。</p>
+<p>等待创建完成，我们依次点击 新建 -&gt; 文件，在搜索框里填写“头文件”，选择“头文件(.h)”</p>
+<p>至此，我们的文件创建完毕。</p>
+<hr>
+<h2 id="0x03-基本框架"><a href="#0x03-基本框架" class="headerlink" title="0x03 基本框架"></a>0x03 基本框架</h2><p>由于这是一个按钮组件，我们定义创建按钮的语句为<br><code>Button 按钮名称(x坐标,y坐标,x方向的长度,y方向的长度,文本,文本颜色);</code><br>，以下就是一个例子：<br><code>Button Mybutton(200,200,100,50,(char *)&quot;Hello,World!&quot;);</code></p>
+<p>而这个“Button”实际上是一个类，也就是 <code>class</code> ，而 MyButton 后面的括号里的内容是构造函数。</p>
+<p>所以，我们可以打出以下代码框架：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;easyx.h&gt;</span> <span class="hljs-comment">//使用EasyX的库函数</span></span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Button</span><br>&#123;<span class="hljs-comment">//声明 Button 类</span><br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-comment">//各种信息的存储</span><br>    <span class="hljs-type">int</span> x, y, x_length, y_length;<br>	<span class="hljs-type">char</span>* text;<br>	<span class="hljs-type">int</span> textcolor;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">press</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function">	</span>&#123;<span class="hljs-comment">//按下的外表绘制</span><br>		<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function">	</span>&#123;<span class="hljs-comment">//初始状态绘制</span><br>		<br>	&#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">bool</span> push = <span class="hljs-literal">false</span>; <span class="hljs-comment">//表示是否按下</span><br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">testpress</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function">	</span>&#123;<span class="hljs-comment">//检测按下情况</span><br>		<br>	&#125;<br>	<span class="hljs-built_in">Button</span>(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> x_length, <span class="hljs-type">int</span> y_length, <span class="hljs-type">char</span>* text, <span class="hljs-type">int</span> textcolor)<br>	&#123;<span class="hljs-comment">//构造函数</span><br>        <span class="hljs-comment">//全部赋值</span><br>		<span class="hljs-keyword">this</span>-&gt;x = x;<br>		<span class="hljs-keyword">this</span>-&gt;y = y;<br>		<span class="hljs-keyword">this</span>-&gt;x_length = x_length;<br>		<span class="hljs-keyword">this</span>-&gt;y_length = y_length;<br>		<span class="hljs-keyword">this</span>-&gt;text = text;<br>		<span class="hljs-keyword">this</span>-&gt;textcolor = textcolor;<br>        <span class="hljs-comment">//绘制初始状态</span><br>		<span class="hljs-built_in">init</span>();<br>	&#125;<br>	~<span class="hljs-built_in">Button</span>() &#123;&#125; <span class="hljs-comment">//析构函数</span><br>&#125;;<span class="hljs-comment">//不要忘了分号</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="0x04-功能实现"><a href="#0x04-功能实现" class="headerlink" title="0x04 功能实现"></a>0x04 功能实现</h2><p>接下来，我们进行每一项功能的实现。</p>
+<hr>
+<h3 id="0x04-1-init-函数实现"><a href="#0x04-1-init-函数实现" class="headerlink" title="0x04.1 init() 函数实现"></a>0x04.1 init() 函数实现</h3><p>我们需要绘制一个矩形，表示按钮的边框，在按钮边框的上边和右边再加深阴影，并打印文本。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-built_in">setlinestyle</span>(<span class="hljs-number">0</span>, <span class="hljs-number">4</span>);<span class="hljs-comment">//设置粗细为4，线条样式为 0 (普通线条)</span><br>    <span class="hljs-comment">//外边框</span><br>	<span class="hljs-built_in">setlinecolor</span>(<span class="hljs-number">0x8d8d8d</span>);<br>	<span class="hljs-built_in">rectangle</span>(x, y, x + x_length, y + y_length);<br>    <span class="hljs-comment">//两条阴影</span><br>	<span class="hljs-built_in">setlinecolor</span>(<span class="hljs-number">0xbababa</span>);<br>	<span class="hljs-built_in">line</span>(x + x_length - <span class="hljs-number">3</span>, y + <span class="hljs-number">3</span>, x + x_length - <span class="hljs-number">3</span>, y + y_length - <span class="hljs-number">3</span>);<br>	<span class="hljs-built_in">line</span>(x + <span class="hljs-number">3</span>, y + <span class="hljs-number">3</span>, x + x_length - <span class="hljs-number">3</span>, y + <span class="hljs-number">3</span>);<br>    <span class="hljs-comment">//打印文本</span><br>	<span class="hljs-built_in">settextcolor</span>(textcolor);<br>	<span class="hljs-built_in">outtextxy</span>(x + <span class="hljs-number">3</span>, y + (y_length / <span class="hljs-number">2</span>) - <span class="hljs-number">7</span>, text);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="0x04-2-press-函数实现"><a href="#0x04-2-press-函数实现" class="headerlink" title="0x04.2 press() 函数实现"></a>0x04.2 press() 函数实现</h3><p>其实代码和 init() 函数差不多，只是颜色不同，没有文字修改而已。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">press</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-built_in">setlinestyle</span>(<span class="hljs-number">0</span>, <span class="hljs-number">4</span>);<span class="hljs-comment">//设置粗细为4，线条样式为 0 (普通线条)</span><br>    <span class="hljs-comment">//外边框</span><br>	<span class="hljs-built_in">setlinecolor</span>(<span class="hljs-number">0xbababa</span>);<br>	<span class="hljs-built_in">rectangle</span>(x, y, x + x_length, y + y_length);<br>    <span class="hljs-comment">//两条阴影</span><br>	<span class="hljs-built_in">setlinecolor</span>(<span class="hljs-number">0x8d8d8d</span>);<br>	<span class="hljs-built_in">line</span>(x + x_length - <span class="hljs-number">3</span>, y + <span class="hljs-number">3</span>, x + x_length - <span class="hljs-number">3</span>, y + y_length - <span class="hljs-number">3</span>);<br>	<span class="hljs-built_in">line</span>(x + <span class="hljs-number">3</span>, y + <span class="hljs-number">3</span>, x + x_length - <span class="hljs-number">3</span>, y + <span class="hljs-number">3</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="0x04-3-testpress-函数实现"><a href="#0x04-3-testpress-函数实现" class="headerlink" title="0x04.3 testpress() 函数实现"></a>0x04.3 testpress() 函数实现</h3><p>这个函数我们需要首先获取一个鼠标的动作，然后再判断是否是左键、是否在按钮区域中点击等，如果是，那么就修改按钮外观和 push 变量的值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">testpress</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (<span class="hljs-built_in">MouseHit</span>())<span class="hljs-comment">//判断是否有关于鼠标的信息</span><br>	&#123;<br>		MOUSEMSG msg = <span class="hljs-built_in">GetMouseMsg</span>();<span class="hljs-comment">//获取鼠标信息</span><br>		<span class="hljs-keyword">if</span> (msg.uMsg == WM_LBUTTONDOWN)<span class="hljs-comment">//如果是左键</span><br>		&#123;<br>			<span class="hljs-keyword">if</span> (msg.x &gt; x &amp;&amp; msg.x &lt; x + x_length &amp;&amp; msg.y&gt;y &amp;&amp; msg.y &lt; y + y_length)<span class="hljs-comment">//如果在按钮里点击的</span><br>			&#123;<br>                <span class="hljs-comment">//修改值</span><br>				<span class="hljs-built_in">press</span>();<br>				push = <span class="hljs-literal">true</span>;<br>				<span class="hljs-keyword">while</span> (msg.uMsg != WM_LBUTTONUP)<span class="hljs-comment">//等待鼠标抬起</span><br>				&#123;<br>					msg = <span class="hljs-built_in">GetMouseMsg</span>();<br>				&#125;<br>			&#125;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (push == <span class="hljs-literal">true</span>)<span class="hljs-built_in">init</span>(), push = <span class="hljs-literal">false</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (push == <span class="hljs-literal">true</span>)<span class="hljs-built_in">init</span>(), push = <span class="hljs-literal">false</span>;<br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (push == <span class="hljs-literal">true</span>)<span class="hljs-built_in">init</span>(), push = <span class="hljs-literal">false</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>不过我们发现，这样写会报错，原因是 <code>MouseHit()</code> 等函数未定义！</p>
+<p>这是为什么呢？因为这些函数其实 <code>easyx.h</code> 并没有包含这个函数，我们需要导入一些额外的头文件。</p>
+<p>这里我们导入的 <code>windows.h</code> 在 linux 环境下并不能使用，不过不用担心，easyx 本身也只能在 windows 下使用，所以并不影响我们的开发。</p>
+<p>在程序的最前面添加以下代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;easyx.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;windows.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;graphics.h&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>这样就好啦！</p>
+<hr>
+<h2 id="0x05-完成啦！"><a href="#0x05-完成啦！" class="headerlink" title="0x05 完成啦！"></a>0x05 完成啦！</h2><p>至此，我们的 EasyButtonX 就开发到这里啦，各位读者也可以自行更新出其它功能呢！</p>
+<p>~ 完结散花 ヾ(◍°∇°◍)ﾉﾞ ~ </p>
+<hr>
+<h2 id="附录-完整代码"><a href="#附录-完整代码" class="headerlink" title="附录 完整代码"></a>附录 完整代码</h2><p>如果自己写不出来的话，可以看看这个代码，或者去看看 <a target="_blank" rel="noopener" href="https://github.com/DijkstraPhoenix/EasyButtonX">项目地址</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;easyx.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;windows.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;graphics.h&gt;</span></span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Button</span><br>&#123;<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-type">int</span> x, y, x_length, y_length;<span class="hljs-comment">//Start x,start y,x &#x27;s length,y &#x27;s length</span><br>	<span class="hljs-type">char</span>* text;<span class="hljs-comment">//Button &#x27;s text</span><br>	<span class="hljs-type">int</span> textcolor;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">press</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function">	</span>&#123;<span class="hljs-comment">//This function is draw this Button</span><br>		<span class="hljs-built_in">setlinestyle</span>(<span class="hljs-number">0</span>, <span class="hljs-number">4</span>);<br>		<span class="hljs-built_in">setlinecolor</span>(<span class="hljs-number">0xbababa</span>);<br>		<span class="hljs-built_in">rectangle</span>(x, y, x + x_length, y + y_length);<br>		<span class="hljs-built_in">setlinecolor</span>(<span class="hljs-number">0x8d8d8d</span>);<br>		<span class="hljs-built_in">line</span>(x + x_length - <span class="hljs-number">3</span>, y + <span class="hljs-number">3</span>, x + x_length - <span class="hljs-number">3</span>, y + y_length - <span class="hljs-number">3</span>);<br>		<span class="hljs-built_in">line</span>(x + <span class="hljs-number">3</span>, y + <span class="hljs-number">3</span>, x + x_length - <span class="hljs-number">3</span>, y + <span class="hljs-number">3</span>);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-built_in">setlinestyle</span>(<span class="hljs-number">0</span>, <span class="hljs-number">4</span>);<br>		<span class="hljs-built_in">setlinecolor</span>(<span class="hljs-number">0x8d8d8d</span>);<br>		<span class="hljs-built_in">rectangle</span>(x, y, x + x_length, y + y_length);<br>		<span class="hljs-built_in">setlinecolor</span>(<span class="hljs-number">0xbababa</span>);<br>		<span class="hljs-built_in">line</span>(x + x_length - <span class="hljs-number">3</span>, y + <span class="hljs-number">3</span>, x + x_length - <span class="hljs-number">3</span>, y + y_length - <span class="hljs-number">3</span>);<br>		<span class="hljs-built_in">line</span>(x + <span class="hljs-number">3</span>, y + <span class="hljs-number">3</span>, x + x_length - <span class="hljs-number">3</span>, y + <span class="hljs-number">3</span>);<br>		<span class="hljs-built_in">settextcolor</span>(textcolor);<br>		<span class="hljs-built_in">outtextxy</span>(x + <span class="hljs-number">3</span>, y + (y_length / <span class="hljs-number">2</span>) - <span class="hljs-number">7</span>, text);<br>	&#125;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-type">bool</span> push = <span class="hljs-literal">false</span>;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">testpress</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">MouseHit</span>())<br>		&#123;<br>			MOUSEMSG msg = <span class="hljs-built_in">GetMouseMsg</span>();<br>			<span class="hljs-keyword">if</span> (msg.uMsg == WM_LBUTTONDOWN)<br>			&#123;<br>				<span class="hljs-keyword">if</span> (msg.x &gt; x &amp;&amp; msg.x &lt; x + x_length &amp;&amp; msg.y&gt;y &amp;&amp; msg.y &lt; y + y_length)<br>				&#123;<br>					<span class="hljs-built_in">press</span>();<br>					push = <span class="hljs-literal">true</span>;<br>					<span class="hljs-keyword">while</span> (msg.uMsg != WM_LBUTTONUP)<br>					&#123;<br>						msg = <span class="hljs-built_in">GetMouseMsg</span>();<br>					&#125;<br>				&#125;<br>				<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (push == <span class="hljs-literal">true</span>)<span class="hljs-built_in">init</span>(), push = <span class="hljs-literal">false</span>;<br>			&#125;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (push == <span class="hljs-literal">true</span>)<span class="hljs-built_in">init</span>(), push = <span class="hljs-literal">false</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (push == <span class="hljs-literal">true</span>)<span class="hljs-built_in">init</span>(), push = <span class="hljs-literal">false</span>;<br>	&#125;<br>	<span class="hljs-built_in">Button</span>(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> x_length, <span class="hljs-type">int</span> y_length, <span class="hljs-type">char</span>* text, <span class="hljs-type">int</span> textcolor)<br>	&#123;<span class="hljs-comment">//This function is init this button</span><br>		<span class="hljs-keyword">this</span>-&gt;x = x;<br>		<span class="hljs-keyword">this</span>-&gt;y = y;<br>		<span class="hljs-keyword">this</span>-&gt;x_length = x_length;<br>		<span class="hljs-keyword">this</span>-&gt;y_length = y_length;<br>		<span class="hljs-keyword">this</span>-&gt;text = text;<br>		<span class="hljs-keyword">this</span>-&gt;textcolor = textcolor;<br>		<span class="hljs-built_in">init</span>();<br>	&#125;<br>	~<span class="hljs-built_in">Button</span>() &#123;&#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%BC%80%E5%8F%91/">#开发</a>
+      
+        <a href="/tags/%E7%BB%84%E4%BB%B6/">#组件</a>
+      
+        <a href="/tags/C/">#C++</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>EasyButtonX开发全程实录</div>
+      <div>http://example.com/2023/02/21/EasyButtonX开发全程实录/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>DijkstraPhoenix</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年2月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/01/%E6%95%99%E7%A8%8B-%E5%88%B6%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F/" title="教程-制作自己的安装程序">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">教程-制作自己的安装程序</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/08/Welcome-my-blog/" title="Welcome my blog!">
+                        <span class="hidden-mobile">Welcome my blog!</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
