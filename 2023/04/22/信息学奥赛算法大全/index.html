@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://i.328888.xyz/2023/04/27/i9z4wc.png">
 <meta property="og:image" content="https://i.imgloc.com/2023/05/23/VAFTc5.png">
 <meta property="article:published_time" content="2023-04-22T02:33:06.000Z">
-<meta property="article:modified_time" content="2023-05-23T11:50:42.622Z">
+<meta property="article:modified_time" content="2023-07-14T03:46:46.080Z">
 <meta property="article:author" content="DijkstraPhoenix">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="信息学">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.2k 字
+          7.9k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          61 分钟
+          66 分钟
         
       </span>
     
@@ -346,7 +346,7 @@
 <p>不过变量也有取值范围，这里写出几种：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-type">int</span>: (<span class="hljs-number">-2</span>^<span class="hljs-number">31</span><span class="hljs-number">-1</span>)~(<span class="hljs-number">2</span>^<span class="hljs-number">31</span><span class="hljs-number">-1</span>)<br><span class="hljs-type">long</span> <span class="hljs-type">long</span>:(<span class="hljs-number">-2</span>^<span class="hljs-number">63</span><span class="hljs-number">-1</span>)~(<span class="hljs-number">2</span>^<span class="hljs-number">63</span><span class="hljs-number">-1</span>)<br><span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span>: (<span class="hljs-number">0</span>)~(<span class="hljs-number">2</span>^<span class="hljs-number">64</span><span class="hljs-number">-1</span>)<br><span class="hljs-type">bool</span>: <span class="hljs-literal">true</span>或<span class="hljs-literal">false</span><br>......<br></code></pre></td></tr></table></figure>
 
-<p>超过变量的取值范围，变量将会顶破符号位（在位运算中会详细讲解），变成一个极大的负数。</p>
+<p>超过变量的取值范围，变量将会顶破符号位（在位运算中会详细讲解），变成一个极小的负数。</p>
 <p>在我们编程中，要选择合适的变量类型和名称，否则会造成不必要的错误。</p>
 <p>变量的命名规则有以下几点：1.只能由大小写英文字母、数字和下划线组成（可以使用下划线或者大小写来表示空格）。2.不能以数字开头。3.要避免已经定义过的变量，不管是什么类型的，而且不能定义 C++ 自带的标识符（例如 cin、cout、printf 等）。</p>
 <p>变量也可以互相运算，在 C++ 里，运算符分别是这样的：</p>
@@ -460,8 +460,18 @@
 <h3 id="1-7-一维数组"><a href="#1-7-一维数组" class="headerlink" title="1.7 一维数组"></a>1.7 一维数组</h3><p>如果我们需要输入 10 个整数，并且输出它们的和，只用变量的话，我们就需要像 <code>int a,b,c,d,e,f,g,h,i,j;</code> 这样定义 10 个变量，非常麻烦。那么，如果可以把它们合并成一个长条，就方便多了。于是，C++ 里引进了数组的思想。</p>
 <p>我们可以把数组看成这样的一个长条：</p>
 <p><img src="https://i.imgloc.com/2023/05/23/VAFTc5.png" srcset="/img/loading.gif" lazyload alt="数组.png"></p>
-<p>我们在定义数组时，只需要在变量的基础上，在后面加速中括号并填上数组大小即可。如：定义一个长度为 10 的整型数组 A，就可以写作 <code>int A[10];</code> ，如需访问一个值，就在中括号里写上下标位置即可。如输出 A 的第 6 个值，可以写作 <code>cout&lt;&lt;A[6]</code>。</p>
+<p>我们在定义数组时，只需要在变量的基础上，在后面加速中括号并填上数组大小即可。如：定义一个长度为 10 的整型数组 A，就可以写作 <code>int A[10];</code> ，如需访问一个值，就在中括号里写上下标位置即可。如输出 A 的第 6 个值，可以写作 <code>cout&lt;&lt;A[5]</code>。<strong>它的下标是0~9。</strong></p>
 <h4 id="查找特定的值"><a href="#查找特定的值" class="headerlink" title="查找特定的值"></a>查找特定的值</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B2093">洛谷 B2093</a></p>
+<p>这道题我们可以使用顺序查找的方式，先看看数组的第0位（下标从零计）是不是目标值，如果是，输出下标。否则查找下一位。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> a[<span class="hljs-number">10005</span>];<span class="hljs-comment">//稍微开大一点</span><br><span class="hljs-comment">//数组尽量定义成全局变量（不要定义在函数里）</span><br><span class="hljs-type">int</span> n,x;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    cin&gt;&gt;n;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)<span class="hljs-comment">//从0~n-1循环读入</span><br>        cin&gt;&gt;a[i];<br>    cin&gt;&gt;x;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(a[i]==x)<span class="hljs-comment">//找到了</span><br>        &#123;<br>            cout&lt;&lt;i;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//因为只需要找到第一个，所以找到后直接结束程序</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">//遍历完数组后还是没有找到</span><br>    cout&lt;&lt;<span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这样类型的题如果 n 太大的话（例如1 &lt;&#x3D; n &lt;&#x3D; 10^9），顺序查找就无法在指定时间内完成了（时间复杂度 O(n) ），对于一个有序的数组（单调递不增或单调不降），我们可以使用二分查找的方式解决，在后面会详细讲解。</p>
+<h4 id="课后习题-3"><a href="#课后习题-3" class="headerlink" title="课后习题"></a>课后习题</h4><p>1.<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B2089">洛谷 B2089 数组逆序重存放</a></p>
+<p>提示：此题可以使用两个循环变量实现，例如 <code>for(int i=1,j=n;i&lt;=n;i++,j--)</code></p>
+<p>2.<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B2104">洛谷 B2104 矩阵加法</a></p>
+<p>提示：此题需要循环嵌套（在一个循环里写循环）</p>
+<hr>
 <h2 id="二、基础算法"><a href="#二、基础算法" class="headerlink" title="二、基础算法"></a>二、基础算法</h2><h3 id="1-1-模拟算法"><a href="#1-1-模拟算法" class="headerlink" title="1.1 模拟算法"></a>1.1 模拟算法</h3><p>模拟是一种最基础的算法，它的策略是按照题目的要求，一步一步的进行模拟各个值的变化，从而获取答案。</p>
 <h4 id="Peter-的烟"><a href="#Peter-的烟" class="headerlink" title="Peter 的烟"></a>Peter 的烟</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1150">洛谷 P1150</a></p>
 <h5 id="题目描述-7"><a href="#题目描述-7" class="headerlink" title="题目描述"></a>题目描述</h5><p>Peter 有 n 根烟，他每吸完一根烟就把烟蒂保存起来，k(k &gt; 1)个烟蒂可以换一个新的烟，那么 Peter 最终能吸到多少根烟呢？</p>
